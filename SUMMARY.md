@@ -4,11 +4,10 @@
 
 ## Design Principles
 
----
-
-* [Principles](principles.md)
+* [Principles](design-principles/principles.md)
 
 ## Design Patterns
 
 * [Strategy Pattern](design-patterns/strategy-pattern.md)
+* [Factory Pattern](design-patterns/factory-pattern.md)
 

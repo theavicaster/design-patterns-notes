@@ -1,12 +1,10 @@
----
-description: 'More details at https://java-design-patterns.com/patterns/strategy/'
----
-
 # Strategy Pattern
 
 The **Strategy Pattern** defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
 
 Strategy pattern allows choosing the best suited algorithm or best **behavior** at runtime. We are composing a class by injecting behaviors.
+
+More details at [https://java-design-patterns.com/patterns/strategy/](https://java-design-patterns.com/patterns/strategy/)
 
 ```java
 public abstract class Duck {
