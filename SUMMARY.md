@@ -11,4 +11,5 @@
 * [Strategy Pattern](design-patterns/strategy-pattern.md)
 * [Observer Pattern](design-patterns/observer-pattern.md)
 * [Factory Pattern](design-patterns/factory-pattern.md)
+* [Command Pattern](design-patterns/command-pattern.md)
 
