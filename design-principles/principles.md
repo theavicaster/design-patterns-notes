@@ -7,6 +7,8 @@
 * **Program to an interface, not an implementation**
 * **Favor composition over inheritance**
   * The HAS-A relationship can be better than IS-A. It lets you change behavior at runtime.
+* **Open-Close Principle**
+  * Classes should be open for extension, but closed for modification.
 * **Dependency Inversion** 
   * Depend upon abstractions. Do not depend upon concrete classes.
   * Both the high-level and low-level components should depend on abstractions.

@@ -1,8 +1,18 @@
 # Command Pattern
 
-The **Command Pattern** encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.
+The **Command Pattern** encapsulates a request as an object, thereby letting you 
 
-The Command object encapsulates the **Receiver**, who is the object that the command affects. When `execute()` is called, actions are executed upon the receiver.
+* Parameterize other objects \(Receivers\) with different requests
+* Queue or log requests
+* Support undoable operations.
+
+It allows you to decouple the requester of an action from the object that actually performs the action.
+
+The Command object encapsulates the **Receiver**, who is the object that carries out the command. When `execute()` is called, actions are executed upon the receiver. The **Invoker** stores created command objects, and may invoke them when necessary.
+
+The command can also have an `undo()` method. To have multiple undos, we can keep a stack of commands, and call `undo()` on the most recent command.
+
+A database can be recovered from logs in the form of Commands, by sequentially running each command. This is better than storing the entire state of the database at every stage.
 
 Note that commands are independent of the object invoking them. Hence they may be used as callbacks long after the invoker is gone.
 
@@ -16,6 +26,8 @@ public interface Command {
 }
 
 public class LightOnCommand implements Command {
+	
+	// the Receiver of the Command!
 	Light light;
 
 	public LightOnCommand(Light light) {
@@ -27,17 +39,7 @@ public class LightOnCommand implements Command {
 	}
 }
 
-public class LightOffCommand implements Command {
-	Light light;
- 
-	public LightOffCommand(Light light) {
-		this.light = light;
-	}
- 
-	public void execute() {
-		light.off();
-	}
-}
+// similar LightOffCommand
 
 public class Light {
 
@@ -56,54 +58,35 @@ public class Light {
 ```
 
 ```java
-//
 // This is the invoker
-//
-public class RemoteControl {
-	Command[] onCommands;
-	Command[] offCommands;
- 
-	public RemoteControl() {
-		onCommands = new Command[7];
-		offCommands = new Command[7];
- 
-		Command noCommand = new NoCommand();
-		for (int i = 0; i < 7; i++) {
-			onCommands[i] = noCommand;
-			offCommands[i] = noCommand;
-		}
+public class SimpleRemoteControl {
+	
+	Command slot;
+	public SimpleRemoteControl() {}
+	
+	public void setCommand(Command command){
+		slot = command;
 	}
-  
-	public void setCommand(int slot, Command onCommand, Command offCommand) {
-		onCommands[slot] = onCommand;
-		offCommands[slot] = offCommand;
-	}
- 
-	public void onButtonWasPushed(int slot) {
-		onCommands[slot].execute();
-	}
- 
-	public void offButtonWasPushed(int slot) {
-		offCommands[slot].execute();
+	
+	public void buttonWasPressed() {
+		slot.execute();
 	}
 }
 
 public class RemoteLoader {
  
 	public static void main(String[] args) {
-		RemoteControl remoteControl = new RemoteControl();
+		
+		SimpleRemoteControl remoteControl = new SimpleRemoteControl();
  
-		Light livingRoomLight = new Light("Living Room");
-
-		LightOnCommand livingRoomLightOn = 
-				new LightOnCommand(livingRoomLight);
-		LightOffCommand livingRoomLightOff = 
-				new LightOffCommand(livingRoomLight);
+		Light myLight = new Light();
+		LightOnCommand lightOn = 
+				new LightOnCommand(myLight);
+		LightOffCommand lightOff = 
+				new LightOffCommand(myLight);
  
-		remoteControl.setCommand(0, livingRoomLightOn, livingRoomLightOff);
- 
-		remoteControl.onButtonWasPushed(0);
-		remoteControl.offButtonWasPushed(0);
+		remoteControl.setCommand(lightOn);
+		remoteControl.buttonWasPressed();
 
 	}
 }
