@@ -21,4 +21,6 @@
 * **The Hollywood Principle**
   * Don’t call us, we’ll call you.
   * High level components call low-level components when needed, not vice versa.
+* **Single Responsibility Principle**
+  * A class should have only one reason to change
 
