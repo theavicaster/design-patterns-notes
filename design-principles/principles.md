@@ -15,6 +15,10 @@
   * No variable should hold a reference to a concrete class \(use a factory when you need `new()`\)
   * No class should derive from a concrete class \(derive from an absraction instead\)
   * No method should override an implemented method of any of its base classes. 
-
-
+* **Principle of Least Knowledge**
+  * Talk only to your immediate friends.
+  * If A is in current scope, we can use A.B, but we cannot use A.B.C
+* **The Hollywood Principle**
+  * Don’t call us, we’ll call you.
+  * High level components call low-level components when needed, not vice versa.
 

@@ -14,4 +14,7 @@
 * [Factory Pattern](design-patterns/factory-pattern.md)
 * [Singleton Pattern](design-patterns/singleton-pattern.md)
 * [Command Pattern](design-patterns/command-pattern.md)
+* [Adapter Pattern](design-patterns/adapter-pattern.md)
+* [Facade Pattern](design-patterns/facade-pattern.md)
+* [Template Method Pattern](design-patterns/template-method-pattern.md)
 
