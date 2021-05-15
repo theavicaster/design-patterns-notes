@@ -17,4 +17,5 @@
 * [Adapter Pattern](design-patterns/adapter-pattern.md)
 * [Facade Pattern](design-patterns/facade-pattern.md)
 * [Template Method Pattern](design-patterns/template-method-pattern.md)
+* [Composite Pattern](design-patterns/composite-pattern.md)
 
