@@ -9,7 +9,7 @@ public class Singleton {
     
     private Singleton() {}
     
-    public static synchronized getInstance(){
+    public static synchronized Singleton getInstance(){
         if(INSTANCE == null)
             INSTANCE = new Singleton();
         return INSTANCE;
@@ -18,6 +18,44 @@ public class Singleton {
 ```
 
 Notice that we don't need `synchronized` every time, we only need it the first time Singleton is created. Hence there is unnecessary overhead.
+
+```java
+// both these interfaces have a chance of getting a new instance
+public class Singleton implements Serializable, Cloneable {
+    
+    private volatile static Singleton INSTANCE;
+    
+    private Singleton() {
+        // if Java reflection attempts to call this constructor
+        if(INSTANCE != null) {
+            throw new IllegalStateException("Already exists!");
+        }
+    }
+    
+    // since this method does not need to be synchronized
+    // for every single call
+    public static Singleton getInstance(){
+        if(INSTANCE == null) {
+            synchronized(this.class) {
+                if(INSTANCE == null) {
+                    INSTANCE = new Singleton();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+    
+    @Override // from Serializable
+    protected Object readResolve() {
+        return INSTANCE;
+    }
+    
+    @Override // from Cloneable
+    protected Object clone() throws CloneNotSupportedException() {
+        throw new CloneNotSupportedException();
+    }
+}
+```
 
 An effective way to create Singletons -
 
@@ -36,4 +74,3 @@ public static void main(String[] args){
     singleton.sayHello();
 }
 ```
-
